@@ -24,10 +24,10 @@
               system.checks = [
                 (pkgs.runNixosTest {
                   name = "example";
+                  # how do i pass my own nixos config in here?
+                  # i cant use specialArgs
                   nodes.machine = { config, pkgs, ... }:
-                    {
-
-                    };
+                    { };
                   testScript = { nodes, ... }: ''
 
                     machine.wait_for_unit("default.target")
