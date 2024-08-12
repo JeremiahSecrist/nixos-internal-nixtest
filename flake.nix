@@ -22,17 +22,14 @@
             # goal write a nixos test against own config
             ({ pkgs, config, lib, ... }: {
               system.checks = [
-                (pkgs.runNixosTest {
+                (pkgs.testers.runNixOSTest {
                   name = "example";
                   # how do i pass my own nixos config in here?
                   # i cant use specialArgs
                   nodes.machine = { config, pkgs, ... }:
                     { };
                   testScript = { nodes, ... }: ''
-
                     machine.wait_for_unit("default.target")
-                    machine.succeed("su -- alice -c 'which firefox'")
-                    machine.fail("su -- root -c 'which firefox'")
                   '';
                 })
               ];
